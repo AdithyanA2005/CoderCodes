@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { languages } from "@/data/prism";
 
 export const post = defineType({
   name: "post",
@@ -19,6 +20,13 @@ export const post = defineType({
     defineField({
       name: "views",
       type: "number",
+    }),
+    defineField({
+      name: "language",
+      type: "string",
+      options: {
+        list: languages,
+      },
     }),
     defineField({
       name: "path",
