@@ -11,7 +11,7 @@ type PostWithCategories = Omit<Post, "categories"> & { categories?: { _id: strin
 const md = markdown();
 
 export default async function Page({ params }: { params: Promise<{ postSlug: string; collectionSlug: string }> }) {
-  const { postSlug, collectionSlug } = await params;
+  const { postSlug } = await params;
 
   // Fetch the post from Sanity
   const post: PostWithCategories = await client.fetch(POST_BY_SLUG_QUERY, { slug: postSlug });
@@ -28,7 +28,6 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
 
   // Parse the post content
   const contents = await response.json();
-  console.log(contents);
 
   // Decode the base64-encoded content(code)
   const code = Buffer.from(contents.content, "base64").toString("utf-8");
@@ -46,7 +45,7 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
         {parsedDetails ? (
           <article
             dangerouslySetInnerHTML={{ __html: parsedDetails }}
-            className="prose font-work-sans dark:prose-invert max-w-4xl break-all"
+            className="font-work-sans prose max-w-4xl break-all dark:prose-invert"
           />
         ) : null}
       </section>

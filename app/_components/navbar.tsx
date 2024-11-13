@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LogOutIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { signInAction, signOutAction } from "@/lib/actions";
-import { auth, signIn, signOut } from "@/auth";
+import { auth } from "@/auth";
 
 export async function Navbar() {
   const session = await auth();
