@@ -19,7 +19,7 @@ export const POST_BY_SLUG_QUERY = `
 `;
 
 export const USER_BY_GOOGLE_ID_QUERY = `
-*[_type == "user" && id == $id][0]{
+*[_type == "user" && email == $email][0]{
   _id, id, name, username, email, image, bio
  }
 `;

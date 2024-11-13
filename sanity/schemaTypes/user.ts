@@ -8,10 +8,6 @@ export const user = defineType({
   icon: UserIcon,
   fields: [
     defineField({
-      name: "id",
-      type: "number",
-    }),
-    defineField({
       name: "name",
       type: "string",
     }),
