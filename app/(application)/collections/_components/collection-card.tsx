@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function CollectionCard({ title, slug }: { title: string; slug: string }) {
   return (
     <Link
       href={`/collections/${slug}`}
-      className="bg-secondary/20 hover:bg-secondary/10 border-primary/20 hover:border-primary/50 flex min-h-28 w-full max-w-72 items-center justify-center rounded-2xl border px-5 transition-all hover:scale-105 sm:min-h-32 md:min-h-36"
+      className={cn(
+        "flex items-center justify-center",
+        "rounded-2xl border border-yellow-500",
+        "bg-secondary/20 hover:bg-yellow-500 hover:text-black",
+        "min-h-28 w-full max-w-72 sm:min-h-32 md:min-h-36 lg:min-h-40",
+        "px-5 transition-all hover:scale-105",
+      )}
     >
       <h3 className="text-3xl md:text-4xl">{title}</h3>
     </Link>

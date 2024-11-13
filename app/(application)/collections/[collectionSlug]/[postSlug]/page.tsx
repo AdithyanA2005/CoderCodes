@@ -33,11 +33,9 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
   const code = Buffer.from(contents.content, "base64").toString("utf-8");
 
   return (
-    <main className="mx-auto mt-4 max-w-screen-lg space-y-10 px-4">
+    <main className="mt-[4vh] space-y-10">
       <section>
-        <h1 className="to-accent-500 bg-gradient-to-r from-cyan-500 via-indigo-500 bg-clip-text text-center text-4xl font-bold text-transparent sm:text-5xl">
-          {post.title}
-        </h1>
+        <h1 className="gradient2 gradient_text heading">Select Collection</h1>
         <hr className="my-3" />
       </section>
 

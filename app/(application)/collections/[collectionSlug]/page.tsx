@@ -15,10 +15,10 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
   const posts = collection?.posts;
 
   return (
-    <main className="mt-[20vh] flex flex-col items-center justify-center px-4">
-      <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">Select Program</h1>
+    <main className="mt-[4vh] flex flex-col items-center justify-center px-4">
+      <h1 className="gradient2 gradient_text heading">Select Program</h1>
 
-      <Table className="mx-auto mt-10 max-w-screen-lg text-lg">
+      <Table className="mx-auto mt-10 text-lg">
         <TableCaption>Programs in {collection.title} - Ended</TableCaption>
         <TableHeader>
           <TableRow>

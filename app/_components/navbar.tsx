@@ -11,7 +11,7 @@ export async function Navbar() {
     <header className="border-b shadow-sm">
       <div className="container relative mx-auto flex h-14 items-center justify-between px-4">
         <Link href="/">
-          <h1 className="text-2xl font-semibold">CoderCodes</h1>
+          <h1 className="gradient1 gradient_text text-2xl font-semibold transition-all duration-300">CoderCodes</h1>
         </Link>
 
         {session ? (

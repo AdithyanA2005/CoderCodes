@@ -69,4 +69,22 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  main {
+    @apply mx-auto mt-4 max-w-screen-xl p-4;
+  }
+}
+
+@layer utilities {
+  .heading {
+     @apply text-center text-4xl font-semibold sm:text-5xl md:text-5xl
+  }
+  .gradient_text {
+    @apply bg-clip-text text-transparent;
+  }
+  .gradient1 {
+    @apply bg-gradient-to-r from-yellow-500 via-pink-500 to-orange-500;
+  }
+  .gradient2 {
+    @apply bg-gradient-to-r from-green-500 via-yellow-500 to-orange-500;
+  }
 }

@@ -7,10 +7,10 @@ export default async function Collections() {
   const collections: Omit<Category, "posts">[] = await client.fetch(CATEGORY_QUERY);
 
   return (
-    <main className="mt-[20vh] flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-semibold sm:text-4xl md:text-5xl">Select Collection</h1>
+    <main className="mt-[4vh] flex flex-col items-center justify-center">
+      <h1 className="gradient2 gradient_text heading">Select Collection</h1>
 
-      <div className="mt-10 flex w-full max-w-screen-lg flex-wrap items-center justify-center gap-5 px-4 md:gap-6">
+      <div className="mt-10 flex w-full flex-wrap items-center justify-center gap-5 px-4 md:gap-6">
         {collections?.length > 0 &&
           collections.map((collection) => (
             <CollectionCard
