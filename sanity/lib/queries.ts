@@ -17,3 +17,15 @@ export const POST_BY_SLUG_QUERY = `
   categories[] -> {_id, title, slug}
 }
 `;
+
+export const USER_BY_GOOGLE_ID_QUERY = `
+*[_type == "user" && id == $id][0]{
+  _id, id, name, username, email, image, bio
+ }
+`;
+
+export const USER_BY_GOOGLE_EMAIL_QUERY = `
+*[_type == "user" && email == $email][0]{
+  _id, id, name, username, email, image, bio
+ }
+`;
