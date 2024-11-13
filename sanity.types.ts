@@ -151,6 +151,28 @@ export type Post = {
   title?: string;
   slug?: Slug;
   views?: number;
+  language?:
+    | "javascript"
+    | "python"
+    | "java"
+    | "typescript"
+    | "cpp"
+    | "csharp"
+    | "c"
+    | "html"
+    | "css"
+    | "php"
+    | "ruby"
+    | "swift"
+    | "go"
+    | "rust"
+    | "kotlin"
+    | "bash"
+    | "sql"
+    | "json"
+    | "xml"
+    | "yaml"
+    | "markdown";
   path?: string;
   categories?: Array<{
     _ref: string;
@@ -176,12 +198,8 @@ export type User = {
   _rev: string;
   id?: number;
   name?: string;
-  lastSeen?: string;
-  username?: string;
-  reads?: number;
   email?: string;
   image?: string;
-  bio?: string;
 };
 
 export type Markdown = string;

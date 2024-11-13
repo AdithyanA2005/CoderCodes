@@ -815,6 +815,99 @@
         },
         "optional": true
       },
+      "language": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "javascript"
+            },
+            {
+              "type": "string",
+              "value": "python"
+            },
+            {
+              "type": "string",
+              "value": "java"
+            },
+            {
+              "type": "string",
+              "value": "typescript"
+            },
+            {
+              "type": "string",
+              "value": "cpp"
+            },
+            {
+              "type": "string",
+              "value": "csharp"
+            },
+            {
+              "type": "string",
+              "value": "c"
+            },
+            {
+              "type": "string",
+              "value": "html"
+            },
+            {
+              "type": "string",
+              "value": "css"
+            },
+            {
+              "type": "string",
+              "value": "php"
+            },
+            {
+              "type": "string",
+              "value": "ruby"
+            },
+            {
+              "type": "string",
+              "value": "swift"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rust"
+            },
+            {
+              "type": "string",
+              "value": "kotlin"
+            },
+            {
+              "type": "string",
+              "value": "bash"
+            },
+            {
+              "type": "string",
+              "value": "sql"
+            },
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "xml"
+            },
+            {
+              "type": "string",
+              "value": "yaml"
+            },
+            {
+              "type": "string",
+              "value": "markdown"
+            }
+          ]
+        },
+        "optional": true
+      },
       "path": {
         "type": "objectAttribute",
         "value": {
@@ -954,27 +1047,6 @@
         },
         "optional": true
       },
-      "lastSeen": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "username": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "reads": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
-        },
-        "optional": true
-      },
       "email": {
         "type": "objectAttribute",
         "value": {
@@ -983,13 +1055,6 @@
         "optional": true
       },
       "image": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "bio": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
