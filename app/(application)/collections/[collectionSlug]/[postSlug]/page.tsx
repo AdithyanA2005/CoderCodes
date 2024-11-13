@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
   return (
     <main className="mt-[4vh] space-y-10">
       <section>
-        <h1 className="gradient2 gradient_text heading">Select Collection</h1>
+        <h1 className="gradient2 gradient_text heading">{post.title}</h1>
         <hr className="my-3" />
       </section>
 
