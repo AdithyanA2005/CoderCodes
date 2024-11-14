@@ -5,6 +5,7 @@ import markdown from "markdown-it";
 import { Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { CopyCodeButton } from "./_components/copy-code-button";
 
 type PostWithCategories = Omit<Post, "categories"> & { categories?: { _id: string; title: string; slug: string }[] };
 
@@ -50,13 +51,16 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
 
       <section>
         <h2 className="mt-4 text-2xl font-bold">Program</h2>
-        <SyntaxHighlighter
-          language={post?.language || "plaintext"}
-          style={dracula}
-          codeTagProps={{ className: "text-sm" }}
-        >
-          {code}
-        </SyntaxHighlighter>
+        <div className="relative">
+          <CopyCodeButton codeToCopy={code} />
+          <SyntaxHighlighter
+            language={post?.language || "plaintext"}
+            style={dracula}
+            codeTagProps={{ className: "text-sm" }}
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
       </section>
     </main>
   );
