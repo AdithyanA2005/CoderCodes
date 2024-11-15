@@ -13,6 +13,7 @@ import {
 import { signInAction, signOutAction } from "@/lib/actions";
 import { getInitials } from "@/lib/utils";
 import { auth } from "@/auth";
+import { Logo } from "./logo";
 
 export async function Navbar() {
   const session = await auth();
@@ -20,9 +21,7 @@ export async function Navbar() {
   return (
     <header className="border-b shadow-sm">
       <div className="container relative mx-auto flex h-14 items-center justify-between px-4">
-        <Link href="/">
-          <h1 className="gradient1 gradient_text text-2xl font-semibold transition-all duration-300">CoderCodes</h1>
-        </Link>
+        <Logo />
 
         {session && session.user ? (
           <DropdownMenu>
