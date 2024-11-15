@@ -5,7 +5,6 @@ export const user = defineType({
   name: "user",
   title: "User",
   type: "document",
-  icon: UserIcon,
   fields: [
     defineField({
       name: "name",
@@ -23,6 +22,13 @@ export const user = defineType({
   preview: {
     select: {
       title: "name",
+      imageUrl: "image",
+    },
+    prepare({ title, imageUrl }) {
+      return {
+        title: title,
+        media: imageUrl ? <img src={imageUrl} alt={title || "User Image"} /> : <UserIcon className="size-20" />,
+      };
     },
   },
 });
