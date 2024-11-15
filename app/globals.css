@@ -76,7 +76,7 @@ body {
 
 @layer utilities {
   .heading {
-     @apply text-center text-4xl font-semibold sm:text-5xl md:text-5xl
+    @apply text-center text-4xl font-semibold sm:text-5xl md:text-5xl;
   }
   .gradient_text {
     @apply bg-clip-text text-transparent;
