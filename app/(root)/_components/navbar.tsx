@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { LogOutIcon, UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,7 @@ export async function Navbar() {
   const session = await auth();
 
   return (
-    <header className="border-b shadow-sm">
+    <header className="border-b border-yellow-500 shadow-sm">
       <div className="container relative mx-auto flex h-14 items-center justify-between px-4">
         <Logo />
 
