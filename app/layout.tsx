@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "easymde/dist/easymde.min.css";
-import { Navbar } from "@/app/_components/navbar";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -23,10 +22,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}>{children}</body>
     </html>
   );
 }
