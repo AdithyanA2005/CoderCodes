@@ -17,7 +17,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
   return (
     <main className="mt-[4vh] flex flex-col items-center justify-center px-4">
       <h1 className="gradient2 gradient_text heading">Select Program</h1>
-
+      <p className="mt-5 text-center text-lg text-primary/80 max-w-screen-lg">{collection.description}</p>
       <Table className="mx-auto mt-10 text-lg">
         <TableCaption>Programs in {collection.title} - Ended</TableCaption>
         <TableHeader>
