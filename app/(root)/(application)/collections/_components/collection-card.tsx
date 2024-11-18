@@ -10,10 +10,10 @@ export function CollectionCard({ title, slug }: { title: string; slug: string })
         "rounded-2xl border border-yellow-500",
         "bg-secondary/20 hover:bg-yellow-500 hover:text-black",
         "min-h-28 w-full max-w-72 sm:min-h-32 md:min-h-36 lg:min-h-40",
-        "px-5 transition-all hover:scale-105",
+        "px-5 py-2 transition-all hover:scale-105",
       )}
     >
-      <h3 className="text-3xl md:text-4xl">{title}</h3>
+      <h3 className="text-3xl md:text-4xl text-center">{title}</h3>
     </Link>
   );
 }
