@@ -133,6 +133,7 @@ export type Category = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  description?: string;
   posts?: Array<{
     _ref: string;
     _type: "reference";
@@ -174,13 +175,6 @@ export type Post = {
     | "yaml"
     | "markdown";
   path?: string;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
   details?: string;
 };
 
@@ -196,7 +190,6 @@ export type User = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  id?: number;
   name?: string;
   email?: string;
   image?: string;
