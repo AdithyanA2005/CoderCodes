@@ -61,19 +61,10 @@ export const post = defineType({
           .error("Path must be in format: folder/[subfolders/]filename[.ext]"),
     }),
     defineField({
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      description: "Categories this post belongs to",
-      of: [{ type: "reference", to: [{ type: "category" }] }],
-      validation: (Rule) => Rule.required().min(1).unique(),
-    }),
-    defineField({
       name: "details",
       title: "Post Content",
       type: "markdown",
       description: "Detailed explanation of the code solution",
-      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
