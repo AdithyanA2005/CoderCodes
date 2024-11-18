@@ -2,6 +2,8 @@
 
 A modern web application built with Next.js, Sanity CMS, and TypeScript, featuring authentication and a beautiful UI powered by Tailwind CSS.
 
+Explore this platform where there is a curated collection of programs based on different subjecs/labs
+
 ## Features
 
 - 🚀 Built with Next.js 15 and React 19
