@@ -29,3 +29,9 @@ export const USER_BY_GOOGLE_EMAIL_QUERY = `
   _id, id, name, username, email, image, bio
  }
 `;
+
+export const POST_VIEWS_BY_SLUG_QUERY = `
+*[_type == "post" && slug.current == $slug][0] {
+  _id, views
+}
+`;

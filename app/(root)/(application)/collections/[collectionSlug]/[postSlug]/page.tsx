@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { notFound } from "next/navigation";
@@ -6,6 +7,9 @@ import { Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { CopyCodeButton } from "./_components/copy-code-button";
+import { Views, ViewsSkeleton } from "./_components/views";
+
+export const experimental_ppr = true;
 
 type PostWithCategories = Omit<Post, "categories"> & { categories?: { _id: string; title: string; slug: string }[] };
 
@@ -62,6 +66,10 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
           </SyntaxHighlighter>
         </div>
       </section>
+
+      <Suspense fallback={<ViewsSkeleton />}>
+        <Views slug={postSlug} />
+      </Suspense>
     </main>
   );
 }

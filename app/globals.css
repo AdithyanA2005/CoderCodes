@@ -75,6 +75,9 @@ body {
 }
 
 @layer utilities {
+  .view_container {
+    @apply h-10 w-24 rounded backdrop-blur-sm fixed bg-yellow-500/20 flex justify-center items-center bottom-2 right-2;
+  }
   .heading {
     @apply text-center text-4xl font-semibold sm:text-5xl md:text-5xl;
   }
