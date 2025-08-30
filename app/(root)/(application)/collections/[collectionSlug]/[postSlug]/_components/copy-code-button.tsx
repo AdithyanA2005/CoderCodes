@@ -22,7 +22,7 @@ export function CopyCodeButton({ codeToCopy }: { codeToCopy: string }) {
 
   return (
     <Button
-      className="absolute right-2 top-3 space-x-0 bg-yellow-500 bg-opacity-5 px-2 text-yellow-300 hover:bg-yellow-500 hover:bg-opacity-15 hover:text-yellow-400"
+      className="hover:bg-opacity-15 absolute top-3 right-2 space-x-0 bg-yellow-500/5 px-2 text-yellow-300 hover:bg-yellow-500 hover:text-yellow-400"
       onClick={copyToClipboard}
     >
       {status == "idle" ? (
