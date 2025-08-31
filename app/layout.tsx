@@ -16,7 +16,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "CoderCodes",
-  description: "Collection of curated programs for your lab exams",
+  description: "Showcase of all KTU BTech CS lab programs by Adithyan A.",
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
