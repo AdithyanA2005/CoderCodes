@@ -38,24 +38,26 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
   const code = Buffer.from(contents.content, "base64").toString("utf-8");
 
   return (
-    <main className="mt-[4vh] space-y-10">
-      <section>
-        <h1 className="gradient2 gradient_text heading">{post.title}</h1>
-        <hr className="my-3" />
-      </section>
+    <main className="max-w-main mx-auto">
+      <header className="px-4">
+        <h1 className="text-xl font-semibold text-balance">{post.title}</h1>
+        <p className="text-muted-foreground mt-1 text-sm text-pretty">{post.description}</p>
+      </header>
 
-      <section>
+      <hr className="mt-3 mb-4" />
+
+      <section className="px-4">
         {parsedDetails ? (
           <article
             dangerouslySetInnerHTML={{ __html: parsedDetails }}
-            className="font-work-sans prose max-w-4xl break-all dark:prose-invert"
+            className="font-work-sans prose max-w-main dark:prose-invert break-all"
           />
         ) : null}
       </section>
 
-      <section>
-        <h2 className="mt-4 text-2xl font-bold">Program</h2>
-        <div className="relative">
+      <section className="px-4">
+        <h2 className="mt-6 text-2xl font-bold">Program</h2>
+        <div className="relative mt-6">
           <CopyCodeButton codeToCopy={code} />
           <SyntaxHighlighter
             language={post?.language || "plaintext"}

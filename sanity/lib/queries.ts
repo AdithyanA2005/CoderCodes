@@ -13,7 +13,7 @@ export const CATEGORY_BY_SLUG_QUERY = `
 
 export const POST_BY_SLUG_QUERY = `
 *[_type == "post" && slug.current == $slug][0] {
-  _id, title, slug, views, path, details, language,
+  _id, title, slug, views, path, details, language, description,
   categories[] -> {_id, title, slug}
 }
 `;
