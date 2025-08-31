@@ -1,19 +1,23 @@
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function CollectionCard({ title, slug }: { title: string; slug: string }) {
+interface CollectionCardProps {
+  title: string;
+  slug: string;
+  description?: string;
+}
+
+export function CollectionCard({ title, slug, description }: CollectionCardProps) {
   return (
-    <Link
-      href={`/collections/${slug}`}
-      className={cn(
-        "flex items-center justify-center",
-        "rounded-2xl border border-yellow-500",
-        "bg-secondary/20 hover:bg-yellow-500 hover:text-black",
-        "min-h-28 w-full max-w-72 sm:min-h-32 md:min-h-36 lg:min-h-40",
-        "px-5 py-2 transition-all hover:scale-105",
-      )}
-    >
-      <h3 className="text-3xl md:text-4xl text-center">{title}</h3>
+    <Link href={`/collections/${slug}`}>
+      <Card className="gap-0 transition-shadow hover:shadow-sm">
+        <CardHeader>
+          <CardTitle className="text-base text-balance">{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground text-sm">{description}</p>
+        </CardContent>
+      </Card>
     </Link>
   );
 }

@@ -5,22 +5,29 @@ import { CollectionCard } from "./collections/_components/collection-card";
 
 export default async function Collections() {
   const collections: Omit<Category, "posts">[] = await client.fetch(CATEGORY_QUERY);
-  console.log({collections})
 
   return (
-    <main className="mt-[4vh] flex flex-col items-center justify-center">
-      <h1 className="gradient2 gradient_text heading">Select Collection</h1>
+    <main>
+      <section className="max-w-main mx-auto px-4">
+        <header className="mb-4">
+          <h1 className="text-xl font-semibold text-balance">Lab Collections</h1>
+          <p className="text-muted-foreground mt-1 text-sm text-pretty">
+            Clean and minimal listings of all subjects. Tap a subject to see its programs.
+          </p>
+        </header>
 
-      <div className="mt-10 flex w-full flex-wrap items-center justify-center gap-5 px-4 md:gap-6">
-        {collections?.length > 0 &&
-          collections.map((collection) => (
-            <CollectionCard
-              title={collection.title as string}
-              slug={collection.slug?.current as string}
-              key={`category_card_${collection._id}`}
-            />
-          ))}
-      </div>
+        <div className="flex flex-col gap-3">
+          {collections?.length > 0 &&
+            collections.map((collection) => (
+              <CollectionCard
+                title={collection.title || ""}
+                slug={collection.slug?.current || ""}
+                description={collection.description || ""}
+                key={`category_card_${collection._id}`}
+              />
+            ))}
+        </div>
+      </section>
     </main>
   );
 }
