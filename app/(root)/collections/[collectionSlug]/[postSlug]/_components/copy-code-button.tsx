@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { CopyCheck, CopyIcon, CopyMinus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type StatusType = "idle" | "copied" | "failed";
 
-export function CopyCodeButton({ codeToCopy }: { codeToCopy: string }) {
+export function CopyCodeButton({ codeToCopy, className }: { codeToCopy: string; className?: string }) {
   const [status, setStatus] = useState<StatusType>("idle");
 
   const copyToClipboard = async () => {
@@ -22,7 +23,10 @@ export function CopyCodeButton({ codeToCopy }: { codeToCopy: string }) {
 
   return (
     <Button
-      className="hover:bg-opacity-15 absolute top-3 right-2 space-x-0 bg-yellow-500/5 px-2 text-yellow-300 hover:bg-yellow-500 hover:text-yellow-400"
+      className={cn(
+        "hover:bg-opacity-15 absolute top-3 right-2 space-x-0 bg-yellow-500/5 px-2 text-yellow-300 hover:bg-yellow-500 hover:text-yellow-400",
+        className,
+      )}
       onClick={copyToClipboard}
     >
       {status == "idle" ? (
