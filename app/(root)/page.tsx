@@ -1,10 +1,11 @@
 import { Category } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { CATEGORY_QUERY } from "@/sanity/lib/queries";
-import { CollectionCard } from "./_components/collection-card";
+import { CollectionCard } from "./collections/_components/collection-card";
 
 export default async function Collections() {
   const collections: Omit<Category, "posts">[] = await client.fetch(CATEGORY_QUERY);
+  console.log({collections})
 
   return (
     <main className="mt-[4vh] flex flex-col items-center justify-center">

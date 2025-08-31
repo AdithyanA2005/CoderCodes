@@ -32,7 +32,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
             <TableRow key={post._id}>
               <TableCell className="font-medium">{index + 1}</TableCell>
               <TableCell>
-                <Link className="hover:underline" href={`/collections/${collectionSlug}/${post.slug?.current}`}>
+                <Link className="hover:underline" href={`/app/(root)/collections/${collectionSlug}/${post.slug?.current}`}>
                   {post.title}
                 </Link>
               </TableCell>
