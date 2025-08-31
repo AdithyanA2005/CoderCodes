@@ -17,8 +17,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdownContent }) 
           const content = String(children).replace(/\n$/, "");
 
           return match ? (
-            <div className="relative rounded-xl border shadow-sm">
-              <CopyCodeButton codeToCopy={content} className="-translate-y-[7px]" />
+            <div className="group relative overflow-clip rounded-xl border p-1 shadow-sm">
               <SyntaxHighlighter
                 style={oneLight}
                 language={match[1]}
@@ -28,6 +27,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdownContent }) 
               >
                 {content}
               </SyntaxHighlighter>
+
+              <div className="absolute top-2 right-2">
+                <CopyCodeButton codeToCopy={content} />
+              </div>
             </div>
           ) : (
             <code className={className} {...props}>
