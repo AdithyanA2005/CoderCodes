@@ -1,10 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Category, Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { ProgramCard } from "./_components/program-card";
 
 type CategoryWithPosts = Omit<Category, "posts"> & { posts?: Post[] };
 
@@ -15,36 +13,25 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
   const posts = collection?.posts;
 
   return (
-    <main className="mt-[4vh] flex flex-col items-center justify-center px-4">
-      <h1 className="gradient2 gradient_text heading">Select Program</h1>
-      <p className="mt-5 text-center text-lg text-primary/80 max-w-screen-lg">{collection.description}</p>
-      <Table className="mx-auto mt-10 text-lg">
-        <TableCaption>Programs in {collection.title} - Ended</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[50px]">Sl.No</TableHead>
-            <TableHead>Question</TableHead>
-            <TableHead className="w-[50px] text-right">Code</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+    <main>
+      <section className="max-w-main mx-auto px-4">
+        <header className="mb-4">
+          <h1 className="text-xl font-semibold text-balance">{collection.title}</h1>
+          <p className="text-muted-foreground mt-1 text-sm text-pretty">{collection.description}</p>
+        </header>
+
+        <div className="flex flex-col gap-3">
           {posts?.map((post, index) => (
-            <TableRow key={post._id}>
-              <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>
-                <Link className="hover:underline" href={`/app/(root)/collections/${collectionSlug}/${post.slug?.current}`}>
-                  {post.title}
-                </Link>
-              </TableCell>
-              <TableCell className="text-right">
-                <Button variant="outline" className="h-8 font-semibold" asChild>
-                  <Link href={`/collections/${collectionSlug}/${post.slug?.current}`}>See</Link>
-                </Button>
-              </TableCell>
-            </TableRow>
+            <ProgramCard
+              key={post._id}
+              index={index}
+              title={post.title || ""}
+              description={post.description || ""}
+              route={`${collectionSlug}/${post.slug?.current || ""}`}
+            />
           ))}
-        </TableBody>
-      </Table>
+        </div>
+      </section>
     </main>
   );
 }
