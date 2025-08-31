@@ -12,7 +12,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdownContent }) 
   return (
     <ReactMarkdown
       components={{
-        code({ node, className, children, ...props }: any) {
+        // eslint-disable-next-line
+        code({ className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || "");
           const content = String(children).replace(/\n$/, "");
 

@@ -6,7 +6,6 @@ import MarkdownRenderer from "@/components/markdown-renderer";
 import { Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
-import { CopyCodeButton } from "./_components/copy-code-button";
 import { Views, ViewsSkeleton } from "./_components/views";
 
 export const experimental_ppr = true;
@@ -57,7 +56,7 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
         <section className="px-4">
           <h2 className="text-2xl font-bold">Program</h2>
           <div className="relative mt-6 text-sm">
-            <CopyCodeButton codeToCopy={code} />
+            {/* <CopyCodeButton codeToCopy={code} /> */}
             <SyntaxHighlighter language={post?.language || "plaintext"} style={oneLight} PreTag="div">
               {code}
             </SyntaxHighlighter>
