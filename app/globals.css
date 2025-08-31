@@ -125,6 +125,11 @@
   main {
     @apply mx-auto mt-4 max-w-screen-xl p-4;
   }
+  .prose code,
+  .prose pre {
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
 }
 
 @layer utilities {
@@ -145,6 +150,6 @@
   }
 
   .max-w-main {
-    @apply max-w-xl;
+    @apply max-w-5xl;
   }
 }
