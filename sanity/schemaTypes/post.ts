@@ -22,13 +22,21 @@ export const post = defineType({
       options: {
         source: "title",
         maxLength: 96,
-        slugify: input =>
-          input.toLowerCase()
+        slugify: (input) =>
+          input
+            .toLowerCase()
             .trim()
-            .replace(/[^\w-]+/g, '')
-            .replace(/\s+/g, '-'),
+            .replace(/[^\w-]+/g, "")
+            .replace(/\s+/g, "-"),
       },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Post Description",
+      type: "text",
+      description: "Brief description of what this program is",
+      validation: (Rule) => Rule.max(200),
     }),
     defineField({
       name: "views",
@@ -73,11 +81,11 @@ export const post = defineType({
       views: "views",
       subtitle: "language",
     },
-    prepare({ title, views, subtitle, }) {
+    prepare({ title, views, subtitle }) {
       const language = languages.find((l) => l.value === subtitle);
       return {
         title,
-        subtitle: `${views} views${language ? ` - ${language.title}` : ''}`,
+        subtitle: `${views} views${language ? ` - ${language.title}` : ""}`,
       };
     },
   },

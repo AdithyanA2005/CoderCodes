@@ -13,6 +13,73 @@
  */
 
 // Source: schema.json
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  posts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "post";
+  }>;
+};
+
+export type Post = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  views?: number;
+  language?:
+    | "javascript"
+    | "python"
+    | "java"
+    | "typescript"
+    | "cpp"
+    | "csharp"
+    | "c"
+    | "html"
+    | "css"
+    | "php"
+    | "ruby"
+    | "swift"
+    | "go"
+    | "rust"
+    | "kotlin"
+    | "bash"
+    | "sql"
+    | "json"
+    | "xml"
+    | "yaml"
+    | "markdown";
+  path?: string;
+  details?: string;
+};
+
+export type User = {
+  _id: string;
+  _type: "user";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  email?: string;
+  image?: string;
+};
+
+export type Markdown = string;
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -118,6 +185,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type SanityAssetSourceData = {
   _type: "sanity.assetSourceData";
   name?: string;
@@ -125,79 +198,11 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-  posts?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "post";
-  }>;
-};
-
-export type Post = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  views?: number;
-  language?:
-    | "javascript"
-    | "python"
-    | "java"
-    | "typescript"
-    | "cpp"
-    | "csharp"
-    | "c"
-    | "html"
-    | "css"
-    | "php"
-    | "ruby"
-    | "swift"
-    | "go"
-    | "rust"
-    | "kotlin"
-    | "bash"
-    | "sql"
-    | "json"
-    | "xml"
-    | "yaml"
-    | "markdown";
-  path?: string;
-  details?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type User = {
-  _id: string;
-  _type: "user";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  email?: string;
-  image?: string;
-};
-
-export type Markdown = string;
-
 export type AllSanitySchemaTypes =
+  | Category
+  | Post
+  | User
+  | Markdown
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -207,10 +212,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | SanityImageMetadata
   | Geopoint
-  | SanityAssetSourceData
-  | Category
-  | Post
   | Slug
-  | User
-  | Markdown;
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
