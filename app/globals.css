@@ -134,7 +134,7 @@
 
 @layer utilities {
   .view_container {
-    @apply fixed right-2 bottom-2 flex h-10 w-24 items-center justify-center rounded bg-yellow-500/20 backdrop-blur-sm;
+    @apply bg-primary-foreground/10 fixed right-2 bottom-2 flex h-8 w-auto items-center justify-center rounded-full border px-3 text-sm shadow-xl backdrop-blur-sm;
   }
   .heading {
     @apply text-center text-4xl font-semibold sm:text-5xl md:text-5xl;
