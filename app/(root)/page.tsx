@@ -1,7 +1,7 @@
+import { Record } from "@/components/record";
 import { Category } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { CATEGORY_QUERY } from "@/sanity/lib/queries";
-import { CollectionCard } from "./collections/_components/collection-card";
 
 export default async function Collections() {
   const collections: Omit<Category, "posts">[] = await client.fetch(CATEGORY_QUERY);
@@ -19,11 +19,11 @@ export default async function Collections() {
         <div className="flex flex-col gap-3">
           {collections?.length > 0 &&
             collections.map((collection) => (
-              <CollectionCard
-                title={collection.title || ""}
-                slug={collection.slug?.current || ""}
-                description={collection.description || ""}
+              <Record
                 key={`category_card_${collection._id}`}
+                title={collection.title || ""}
+                href={collection.slug?.current ? `/collections/${collection.slug.current}` : ""}
+                description={collection.description || ""}
               />
             ))}
         </div>

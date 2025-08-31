@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
+import { Record } from "@/components/record";
 import { Category, Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { CATEGORY_BY_SLUG_QUERY } from "@/sanity/lib/queries";
-import { ProgramCard } from "./_components/program-card";
 
 type CategoryWithPosts = Omit<Category, "posts"> & { posts?: Post[] };
 
@@ -22,12 +22,12 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
 
         <div className="flex flex-col gap-3">
           {posts?.map((post, index) => (
-            <ProgramCard
+            <Record
               key={post._id}
-              index={index}
+              index={index + 1}
               title={post.title || ""}
               description={post.description || ""}
-              route={`${collectionSlug}/${post.slug?.current || ""}`}
+              href={post.slug?.current ? `${collectionSlug}/${post.slug.current}` : ""}
             />
           ))}
         </div>
