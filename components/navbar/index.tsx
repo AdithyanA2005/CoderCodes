@@ -41,10 +41,16 @@ export async function Navbar() {
               <DropdownMenuContent align="end" className="w-44">
                 <DropdownMenuLabel>Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild className="!p-0 text-yellow-500 focus:bg-yellow-500/10 focus:text-yellow-500">
-                  <form action={signOutAction}>
-                    <button type="submit" className="w-ful flex items-center gap-2 px-2 py-1.5">
+                <DropdownMenuItem asChild>
+                  <form className="relative" action={signOutAction}>
+                    {/* Placeholder button  */}
+                    <span aria-hidden="true" className="flex items-center gap-2">
                       <LogOutIcon className="size-4" />
+                      Logout
+                    </span>
+
+                    {/* Submit Button */}
+                    <button type="submit" className="absolute inset-0 opacity-0">
                       Logout
                     </button>
                   </form>
