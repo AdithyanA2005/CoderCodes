@@ -18,6 +18,12 @@ export const POST_BY_SLUG_QUERY = `
 }
 `;
 
+export const POSTS_SLUG_QUERY = `
+*[_type == "post"] {
+  _id, slug
+}
+`;
+
 export const USER_BY_GOOGLE_ID_QUERY = `
 *[_type == "user" && email == $email][0]{
   _id, id, name, username, email, image, bio

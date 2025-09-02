@@ -3,10 +3,15 @@ import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/components/markdown-renderer";
 import { Post } from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
-import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { POST_BY_SLUG_QUERY, POSTS_SLUG_QUERY } from "@/sanity/lib/queries";
 import { Views, ViewsSkeleton } from "./_components/views";
 
 export const experimental_ppr = true;
+
+export async function generateStaticParams() {
+  const posts: Pick<Post, "slug">[] = await client.fetch(POSTS_SLUG_QUERY);
+  return posts.map((post) => ({ postSlug: post.slug }));
+}
 
 type PostWithCategories = Omit<Post, "categories"> & { categories?: { _id: string; title: string; slug: string }[] };
 
