@@ -1,6 +1,5 @@
 import { LogOutIcon, UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { Logo } from "@/components/logo";
 import { signInAction, signOutAction } from "@/lib/actions";
 import { getInitials } from "@/lib/utils";
@@ -59,7 +59,12 @@ export async function Navbar() {
             </DropdownMenu>
           ) : (
             <form action={signInAction}>
-              <Button variant="default">Login</Button>
+              <HoverBorderGradient
+                as="button"
+                className="flex items-center space-x-2 bg-white py-1.5 text-black dark:bg-black dark:text-white"
+              >
+                Login
+              </HoverBorderGradient>
             </form>
           )}
         </div>
