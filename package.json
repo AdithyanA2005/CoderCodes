@@ -24,6 +24,7 @@
     "lucide-react": "^0.542.0",
     "markdown-it": "^14.1.0",
     "mongoose": "^8.18.0",
+    "motion": "^12.23.12",
     "next": "15.5.2",
     "next-auth": "5.0.0-beta.29",
     "next-sanity": "^10.0.15",
