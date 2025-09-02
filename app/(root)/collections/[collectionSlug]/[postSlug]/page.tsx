@@ -1,6 +1,4 @@
 import { Suspense } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { notFound } from "next/navigation";
 import MarkdownRenderer from "@/components/markdown-renderer";
 import { Post } from "@/sanity.types";
@@ -19,22 +17,6 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
   const post: PostWithCategories = await client.fetch(POST_BY_SLUG_QUERY, { slug: postSlug });
   if (!post) notFound();
 
-  // TODO: Remove Github deps and completely work on markdown
-  // Fetch the post content from GitHub
-  const response = await fetch(`${process.env.REPO_URL}/contents/${post.path}`, {
-    headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
-  });
-
-  let code;
-
-  if (response.ok) {
-    // Parse the post content
-    const contents = await response.json();
-    code = Buffer.from(contents.content, "base64").toString("utf-8");
-  } else {
-    code = null;
-  }
-
   return (
     <main className="max-w-main mx-auto">
       <header className="px-4">
@@ -49,18 +31,6 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
           <article className="prose max-w-main dark:prose-invert break-all">
             <MarkdownRenderer markdownContent={post.details || ""} />
           </article>
-        </section>
-      )}
-
-      {code && (
-        <section className="px-4">
-          <h2 className="text-2xl font-bold">Program</h2>
-          <div className="relative mt-6 text-sm">
-            {/* <CopyCodeButton codeToCopy={code} /> */}
-            <SyntaxHighlighter language={post?.language || "plaintext"} style={oneLight} PreTag="div">
-              {code}
-            </SyntaxHighlighter>
-          </div>
         </section>
       )}
 
