@@ -1,5 +1,5 @@
 export const CATEGORY_QUERY = `
-*[_type == "category" && defined(slug.current)] | order(title asc) {
+*[_type == "category" && defined(slug.current)] | order(_updatedAt desc) {
   _id, title, slug, description
 }
 `;
