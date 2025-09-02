@@ -259,13 +259,6 @@
         },
         "optional": true
       },
-      "path": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "details": {
         "type": "objectAttribute",
         "value": {

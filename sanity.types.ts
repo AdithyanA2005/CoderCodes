@@ -63,7 +63,6 @@ export type Post = {
     | "xml"
     | "yaml"
     | "markdown";
-  path?: string;
   details?: string;
 };
 

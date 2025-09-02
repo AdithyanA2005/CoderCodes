@@ -58,17 +58,6 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "path",
-      title: "File Path",
-      type: "string",
-      description: "Path to the code file (e.g., 'java/ds/linkedList.java')",
-      placeholder: "folder/[subfolders/]filename[.ext]",
-      validation: (Rule) =>
-        Rule.required()
-          .regex(/^[\w.-]+(?:\/[\w.-]+)*(?:\.\w+)?$/)
-          .error("Path must be in format: folder/[subfolders/]filename[.ext]"),
-    }),
-    defineField({
       name: "details",
       title: "Post Content",
       type: "markdown",
