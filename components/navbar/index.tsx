@@ -13,7 +13,6 @@ import { Logo } from "@/components/logo";
 import { signInAction, signOutAction } from "@/lib/actions";
 import { getInitials } from "@/lib/utils";
 import { auth } from "@/auth";
-import { NavLink } from "./nav-link";
 
 export async function Navbar() {
   const session = await auth();
@@ -24,9 +23,6 @@ export async function Navbar() {
         <div className="flex items-center gap-3">
           <Logo />
         </div>
-        <nav className="hidden items-center gap-4 sm:flex">
-          <NavLink href="/" label="Home" />
-        </nav>
         <div className="flex items-center gap-3">
           {session && session.user ? (
             <DropdownMenu>
