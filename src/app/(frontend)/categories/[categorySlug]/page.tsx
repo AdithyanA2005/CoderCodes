@@ -31,6 +31,7 @@ export default async function CategoryPage({
           equals: categorySlug,
         },
       },
+      limit: 1,
     })
   ).docs[0]
 
