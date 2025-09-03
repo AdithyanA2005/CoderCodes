@@ -1,4 +1,13 @@
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
+
+import { Code } from '../blocks/Code/config'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -26,25 +35,21 @@ export const Posts: CollectionConfig = {
         readOnly: true,
       },
     },
-    // store raw Markdown in a textarea field
     {
       name: 'content',
-      type: 'textarea',
+      type: 'richText',
       required: true,
-      admin: {
-        description: 'Markdown content. Render with your Markdown renderer on the frontend.',
-        // you can use a larger admin textarea size
-        components: {
-          Field: undefined,
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            FixedToolbarFeature(),
+            BlocksFeature({ blocks: [Code] }),
+            InlineToolbarFeature(),
+            HorizontalRuleFeature(),
+          ]
         },
-      },
-    },
-    // link to category (single relation)
-    {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
-      required: true,
+      }),
     },
   ],
 }
