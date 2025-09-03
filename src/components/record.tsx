@@ -32,9 +32,11 @@ export function Record({ index, title, href, description }: RecordProps) {
             <CardTitle className="text-base text-balance">
               <h3>{title}</h3>
             </CardTitle>
-            <CardDescription>
-              <p>{description}</p>
-            </CardDescription>
+            {description && description !== '' && (
+              <CardDescription>
+                <p>{description}</p>
+              </CardDescription>
+            )}
           </CardContent>
         </Card>
       </HoverBorderGradient>
