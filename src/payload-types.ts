@@ -176,27 +176,21 @@ export interface Post {
   slug: string;
   description?: string | null;
   views?: number | null;
-  /**
-   * Markdown content. Render with your Markdown renderer on the frontend.
-   */
-  content: string;
-  category: string | Category;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug: string;
-  description?: string | null;
-  /**
-   * Posts that belong to this category (folder-like view).
-   */
-  posts?: (string | Post)[] | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -218,6 +212,22 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string | null;
+  /**
+   * Posts that belong to this category (folder-like view).
+   */
+  posts?: (string | Post)[] | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -357,7 +367,6 @@ export interface PostsSelect<T extends boolean = true> {
   description?: T;
   views?: T;
   content?: T;
-  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -404,6 +413,17 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CodeBlock".
+ */
+export interface CodeBlock {
+  language?: ('typescript' | 'javascript' | 'css') | null;
+  code: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
