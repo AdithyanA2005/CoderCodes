@@ -45,6 +45,8 @@ export default async function CategoryPage({
           <p className="text-muted-foreground mt-1 text-sm text-pretty">{category.description}</p>
         </header>
 
+        <hr className="mt-3 mb-8" />
+
         <div className="flex flex-col gap-3">
           {/* If the category contains any post */}
           {/* And if the post is populated (ie: not a id string) */}
