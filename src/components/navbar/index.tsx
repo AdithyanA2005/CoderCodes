@@ -27,7 +27,7 @@ export async function Navbar() {
           {session && session.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger aria-label="Account menu">
-                <Avatar>
+                <Avatar className="size-10">
                   <AvatarImage src={session.user.image || ''} />
                   <AvatarFallback>
                     {session.user.name ? (
