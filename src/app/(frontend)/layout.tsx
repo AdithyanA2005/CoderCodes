@@ -1,0 +1,35 @@
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import './styles.css'
+import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/navbar'
+
+const geistSans = localFont({
+  src: '../../../public/fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900',
+})
+const geistMono = localFont({
+  src: '../../../public/fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900',
+})
+
+export const metadata: Metadata = {
+  title: 'CoderCodes',
+  description: 'Showcase of all KTU BTech CS lab programs by Adithyan A.',
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="min-h-screen pb-16">
+          <Navbar />
+          {children}
+        </div>
+        <Footer />
+      </body>
+    </html>
+  )
+}
