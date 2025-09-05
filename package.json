@@ -72,9 +72,7 @@
     "onlyBuiltDependencies": [
       "sharp",
       "esbuild",
-      "unrs-resolver"
-    ],
-    "ignoredBuiltDependencies": [
+      "unrs-resolver",
       "@tailwindcss/oxide"
     ]
   }
