@@ -19,6 +19,7 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@payloadcms/db-mongodb": "3.54.0",
     "@payloadcms/next": "3.54.0",
     "@payloadcms/payload-cloud": "3.54.0",
