@@ -8,6 +8,8 @@ import {
 import { CollectionConfig } from 'payload'
 
 import { Code } from '../blocks/Code/config'
+import { getPayloadClient } from '@/lib/payload-client'
+import { revalidatePath } from 'next/cache'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -52,4 +54,42 @@ export const Posts: CollectionConfig = {
       }),
     },
   ],
+  hooks: {
+    afterChange: [
+      async ({ doc, previousDoc: prevDoc }) => {
+        // New document, always revalidate
+        if (!prevDoc) return
+
+        // Fields that should trigger revalidation
+        const triggerFields = ['title', 'slug', 'content', 'description'] // adjust as needed
+
+        // Check if any trigger field changed
+        const shouldRevalidate = triggerFields.some((key) => {
+          if (typeof doc[key] === 'object' && doc[key] !== null) {
+            const oldContent = JSON.stringify(doc[key])
+            const newContent = JSON.stringify(prevDoc[key])
+            return oldContent !== newContent
+          }
+          return doc[key] !== prevDoc[key]
+        })
+
+        // nothing important changed, skip revalidation
+        if (!shouldRevalidate) return
+
+        const payload = await getPayloadClient()
+        const categories = await payload.find({
+          collection: 'categories',
+          where: {
+            posts: { contains: doc.id },
+          },
+          limit: 100,
+        })
+
+        for (const category of categories.docs) {
+          const categorySlug = category.slug
+          revalidatePath(`/categories/${categorySlug}/${doc.slug}`)
+        }
+      },
+    ],
+  },
 }
