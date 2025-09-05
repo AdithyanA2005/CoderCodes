@@ -45,7 +45,7 @@ export default async function Page({
 
       <hr className="mt-3 mb-8" />
 
-      <RichText className="px-4" data={post.content} enableGutter={true} />
+      <RichText className="px-4" data={post.content} enableGutter={false} />
 
       <Suspense fallback={<ViewsSkeleton />}>
         <Views slug={postSlug} />
