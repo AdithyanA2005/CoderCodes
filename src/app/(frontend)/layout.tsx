@@ -1,24 +1,24 @@
-import type { Metadata } from 'next'
-import localFont from 'next/font/local'
-import './styles.css'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
+import "./styles.css";
 
 const geistSans = localFont({
-  src: '../../../public/fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-})
+  src: "../../../public/fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
 const geistMono = localFont({
-  src: '../../../public/fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-})
+  src: "../../../public/fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
-  title: 'CoderCodes',
-  description: 'Showcase of all KTU BTech CS lab programs by Adithyan A.',
-}
+  title: "CoderCodes",
+  description: "Showcase of all KTU BTech CS lab programs by Adithyan A.",
+};
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -31,5 +31,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <Footer />
       </body>
     </html>
-  )
+  );
 }

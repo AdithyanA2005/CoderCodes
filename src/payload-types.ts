@@ -175,6 +175,7 @@ export interface Post {
   title: string;
   slug: string;
   description?: string | null;
+  category: string | Category;
   views?: number | null;
   content: {
     root: {
@@ -196,6 +197,18 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -212,22 +225,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug: string;
-  description?: string | null;
-  /**
-   * Posts that belong to this category (folder-like view).
-   */
-  posts?: (string | Post)[] | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -365,6 +362,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
+  category?: T;
   views?: T;
   content?: T;
   updatedAt?: T;
@@ -378,7 +376,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
-  posts?: T;
   updatedAt?: T;
   createdAt?: T;
 }

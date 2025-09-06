@@ -1,42 +1,50 @@
-import { notFound } from 'next/navigation'
-import { Record } from '@/components/record'
-import { getPayloadClient } from '@/lib/payload-client'
+import { notFound } from "next/navigation";
+import PaginatedRecordsList from "@/components/records-list";
+import { getPayloadClient } from "@/lib/payload-client";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ categorySlug: string }>
-}) {
-  const { categorySlug } = await params
+async function getPosts({ page, limit = 10, categoryId }: { page: number; limit?: number; categoryId: string }) {
+  const payload = await getPayloadClient();
 
-  const payload = await getPayloadClient()
+  return await payload.find({
+    collection: "posts",
+    select: {
+      title: true,
+      description: true,
+      slug: true,
+    },
+    where: {
+      category: {
+        equals: categoryId,
+      },
+    },
+    page,
+    limit,
+  });
+}
+
+export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
+  const { categorySlug } = await params;
+
+  const payload = await getPayloadClient();
 
   const category = (
     await payload.find({
-      collection: 'categories',
+      collection: "categories",
       select: {
         title: true,
         description: true,
-        posts: true,
-      },
-      populate: {
-        posts: {
-          title: true,
-          description: true,
-          slug: true,
-        },
       },
       where: {
-        slug: {
-          equals: categorySlug,
-        },
+        slug: { equals: categorySlug },
       },
       limit: 1,
     })
-  ).docs[0]
+  ).docs[0];
 
   // If category document is not found return not found
-  if (!category) notFound()
+  if (!category) notFound();
+
+  const posts = await getPosts({ page: 1, categoryId: category.id });
 
   return (
     <main>
@@ -48,26 +56,16 @@ export default async function CategoryPage({
 
         <hr className="mt-3 mb-8" />
 
-        <div className="flex flex-col gap-3">
-          {/* If the category contains any post */}
-          {/* And if the post is populated (ie: not a id string) */}
-          {/* Then show the record card */}
-          {category.posts
-            ? category.posts.map((post, index) => {
-                if (typeof post != 'string')
-                  return (
-                    <Record
-                      key={post.title}
-                      index={index + 1}
-                      title={post.title || ''}
-                      description={post.description || ''}
-                      href={`${categorySlug}/${post.slug}`}
-                    />
-                  )
-              })
-            : null}
-        </div>
+        <PaginatedRecordsList
+          initialData={posts}
+          hrefPrefix={`/categories/${categorySlug}`}
+          getRecordsAction={async (props) => {
+            "use server";
+
+            return getPosts({ categoryId: category.id, ...props });
+          }}
+        />
       </section>
     </main>
-  )
+  );
 }

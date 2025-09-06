@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
-import { HoverBorderGradient } from './ui/hover-border-gradient'
+import Link from "next/link";
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 interface RecordProps {
-  index?: number
-  title: string
-  href: string
-  description?: string
+  index?: number;
+  title: string;
+  href: string;
+  description?: string | null;
 }
 
 export function Record({ index, title, href, description }: RecordProps) {
@@ -19,7 +19,7 @@ export function Record({ index, title, href, description }: RecordProps) {
       >
         <Card className="1transition-shadow 1hover:shadow-sm flex-row gap-0 border-none">
           {/* Left circular index badge */}
-          {typeof index == 'number' && (
+          {typeof index == "number" && (
             <CardContent className="pr-0">
               <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full">
                 <span className="text-sm font-semibold">{index}</span>
@@ -32,7 +32,7 @@ export function Record({ index, title, href, description }: RecordProps) {
             <CardTitle className="text-base text-balance">
               <h3>{title}</h3>
             </CardTitle>
-            {description && description !== '' && (
+            {description && description !== "" && (
               <CardDescription>
                 <p>{description}</p>
               </CardDescription>
@@ -41,5 +41,5 @@ export function Record({ index, title, href, description }: RecordProps) {
         </Card>
       </HoverBorderGradient>
     </Link>
-  )
+  );
 }

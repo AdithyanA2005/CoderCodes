@@ -1,13 +1,13 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from "payload";
 
 export const Categories: CollectionConfig = {
-  slug: 'categories',
+  slug: "categories",
   labels: {
-    singular: 'Category',
-    plural: 'Categories',
+    singular: "Category",
+    plural: "Categories",
   },
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: "title",
   },
   access: {
     // adjust admin access as you need (public read likely ok)
@@ -15,31 +15,19 @@ export const Categories: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
+      name: "title",
+      type: "text",
       required: true,
     },
     {
-      name: 'slug',
-      type: 'text',
+      name: "slug",
+      type: "text",
       required: true,
       unique: true,
     },
     {
-      name: 'description',
-      type: 'textarea',
-    },
-    // make category "contain" posts: relationship with hasMany
-    {
-      name: 'posts',
-      type: 'relationship',
-      relationTo: 'posts',
-      hasMany: true,
-      admin: {
-        description: 'Posts that belong to this category (folder-like view).',
-        // show inline
-        position: 'sidebar',
-      },
+      name: "description",
+      type: "textarea",
     },
   ],
-}
+};

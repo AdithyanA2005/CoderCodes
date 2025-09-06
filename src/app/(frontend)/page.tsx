@@ -1,12 +1,13 @@
-import { Record } from '@/components/record'
-import { getPayloadClient } from '@/lib/payload-client'
+import PaginatedRecordsList from "@/components/records-list";
+import { getPayloadClient } from "@/lib/payload-client";
 
-export default async function Collections() {
-  const payload = await getPayloadClient()
+async function getCategories({ page, limit = 10 }: { page: number; limit?: number }) {
+  "use server";
 
-  // TODO: SETUP PAGINATION
-  const categories = await payload.find({
-    collection: 'categories',
+  const payload = await getPayloadClient();
+
+  return await payload.find({
+    collection: "categories",
     select: {
       title: true,
       slug: true,
@@ -17,9 +18,14 @@ export default async function Collections() {
         exists: true,
       },
     },
-    sort: '-updatedAt', // Desending order
-  })
-  // console.log(collections)
+    page,
+    limit,
+    sort: "-updatedAt", // Desending order
+  });
+}
+
+export default async function Collections() {
+  const categories = await getCategories({ page: 1 });
 
   return (
     <main>
@@ -31,17 +37,8 @@ export default async function Collections() {
           </p>
         </header>
 
-        <div className="flex flex-col gap-3">
-          {categories.docs.map((collection) => (
-            <Record
-              key={`category_card_${collection.id}`}
-              title={collection.title}
-              href={`/categories/${collection.slug}`}
-              description={collection.description || ''}
-            />
-          ))}
-        </div>
+        <PaginatedRecordsList initialData={categories} hrefPrefix="/categories" getRecordsAction={getCategories} />
       </section>
     </main>
-  )
+  );
 }

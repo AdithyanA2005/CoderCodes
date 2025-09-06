@@ -1,67 +1,81 @@
-# Payload Blank Template
+# CoderCodes
 
-This template comes configured with the bare minimum to get started on anything you need.
+A modern web application built with Next.js, Sanity CMS, and TypeScript, featuring authentication and a beautiful UI powered by Tailwind CSS.
 
-## Quick start
+Explore this platform where there is a curated collection of programs based on different subjecs/labs
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+## Features
 
-## Quick Start - local setup
+- 🚀 Built with Next.js 15 and React 19
+- 📝 Content management with Payload CMS
+- 🔐 Authentication using NextAuth.js
+- 💅 Modern UI with Tailwind CSS and Radix UI components
+- 🌗 Markdown support with syntax highlighting
+- 📱 Fully responsive design
+- 🔍 Type-safe development with TypeScript
 
-To spin up this template locally, follow these steps:
+## Prerequisites
 
-### Clone
+- Node.js LTS (v24.5.0 or higher)
+- pnpm (v10.15.0 or higher)
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+## Getting Started
 
-### Development
+1. Clone the repository:
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URI` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+   ```bash
+   git clone https://github.com/AdithyanA2005/CoderCodes
+   cd CoderCodes
+   ```
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+2. Install dependencies:
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+   ```bash
+   pnpm install
+   ```
 
-#### Docker (Optional)
+3. Set up environment variables:
+   - Copy `env.example` to `.env.local`
+   - Fill in the required environment variables
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+4. Run the development server:
 
-To do so, follow these steps:
+   ```bash
+   pnpm run dev
+   ```
 
-- Modify the `MONGODB_URI` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URI` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-## How it works
+## Scripts
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+- `pnpm run dev` - Start the development server
+- `pnpm run build` - Build the application for production
+- `pnpm run start` - Start the production server
 
-### Collections
+## Tech Stack
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **Content Management:** Payload CMS
+- **Styling:** Tailwind CSS
+- **UI Components:** Shadc UI
+- **Authentication:** NextAuth.js
+- **Markdown:** react-syntax-highlighter, Payload RichText component
+- **Code Quality:** ESLint, Prettier
 
-- #### Users (Authentication)
+## Project Structure
 
-  Users are auth-enabled collections that have access to the admin panel.
+- `/src/app/` - Next.js application routes and pages
+- `/src/components` - Reusable React components
+- `/src/lib` - Utility functions and shared code
+- `/public` - Static assets
+- `/src/collections` - Schemas for various collection in payload-cms
+- `/src/block` - Reusable blocks that can be used in payload-cms rich text
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+## Contributing
 
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request

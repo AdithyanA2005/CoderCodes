@@ -1,6 +1,6 @@
-import NextAuth from 'next-auth'
-import Google from 'next-auth/providers/google'
-import { upsertUser } from './lib/actions/payload'
+import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
+import { upsertUser } from "./lib/actions/payload";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
@@ -10,8 +10,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: email!,
         name: name!,
         image: image!,
-      })
-      return true
+      });
+      return true;
     },
 
     async jwt({ token }) {
@@ -19,12 +19,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       //   const user = await User.findOne({ email: token.email }).select("_id");
       //   token.id = user?._id;
       // }
-      return token
+      return token;
     },
 
     async session({ session, token }) {
       // Object.assign(session, { id: token.id });
-      return session
+      return session;
     },
   },
-})
+});
