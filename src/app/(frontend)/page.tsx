@@ -1,12 +1,12 @@
-import { Record } from '@/components/record'
-import { getPayloadClient } from '@/lib/payload-client'
+import { Record } from "@/components/record";
+import { getPayloadClient } from "@/lib/payload-client";
 
 export default async function Collections() {
-  const payload = await getPayloadClient()
+  const payload = await getPayloadClient();
 
   // TODO: SETUP PAGINATION
   const categories = await payload.find({
-    collection: 'categories',
+    collection: "categories",
     select: {
       title: true,
       slug: true,
@@ -17,8 +17,8 @@ export default async function Collections() {
         exists: true,
       },
     },
-    sort: '-updatedAt', // Desending order
-  })
+    sort: "-updatedAt", // Desending order
+  });
   // console.log(collections)
 
   return (
@@ -37,11 +37,11 @@ export default async function Collections() {
               key={`category_card_${collection.id}`}
               title={collection.title}
               href={`/categories/${collection.slug}`}
-              description={collection.description || ''}
+              description={collection.description || ""}
             />
           ))}
         </div>
       </section>
     </main>
-  )
+  );
 }

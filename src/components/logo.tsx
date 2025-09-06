@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export function Logo() {
   return (
@@ -7,5 +7,5 @@ export function Logo() {
         <h1 className="text-xl font-semibold">CoderCodes</h1>
       </div>
     </Link>
-  )
+  );
 }

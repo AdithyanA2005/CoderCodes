@@ -1,19 +1,15 @@
-import { notFound } from 'next/navigation'
-import { Record } from '@/components/record'
-import { getPayloadClient } from '@/lib/payload-client'
+import { notFound } from "next/navigation";
+import { Record } from "@/components/record";
+import { getPayloadClient } from "@/lib/payload-client";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ categorySlug: string }>
-}) {
-  const { categorySlug } = await params
+export default async function CategoryPage({ params }: { params: Promise<{ categorySlug: string }> }) {
+  const { categorySlug } = await params;
 
-  const payload = await getPayloadClient()
+  const payload = await getPayloadClient();
 
   const category = (
     await payload.find({
-      collection: 'categories',
+      collection: "categories",
       select: {
         title: true,
         description: true,
@@ -33,10 +29,10 @@ export default async function CategoryPage({
       },
       limit: 1,
     })
-  ).docs[0]
+  ).docs[0];
 
   // If category document is not found return not found
-  if (!category) notFound()
+  if (!category) notFound();
 
   return (
     <main>
@@ -54,20 +50,20 @@ export default async function CategoryPage({
           {/* Then show the record card */}
           {category.posts
             ? category.posts.map((post, index) => {
-                if (typeof post != 'string')
+                if (typeof post != "string")
                   return (
                     <Record
                       key={post.title}
                       index={index + 1}
-                      title={post.title || ''}
-                      description={post.description || ''}
+                      title={post.title || ""}
+                      description={post.description || ""}
                       href={`${categorySlug}/${post.slug}`}
                     />
-                  )
+                  );
               })
             : null}
         </div>
       </section>
     </main>
-  )
+  );
 }

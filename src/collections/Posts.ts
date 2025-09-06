@@ -1,45 +1,39 @@
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache';
+import { BlocksFeature, FixedToolbarFeature, HorizontalRuleFeature, InlineToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { CollectionConfig } from 'payload';
+import { getPayloadClient } from '@/lib/payload-client';
+import { Code } from '../blocks/Code/config';
 
-import { Code } from '../blocks/Code/config'
-import { getPayloadClient } from '@/lib/payload-client'
-import { revalidatePath } from 'next/cache'
 
 export const Posts: CollectionConfig = {
-  slug: 'posts',
+  slug: "posts",
   labels: {
-    singular: 'Post',
-    plural: 'Posts',
+    singular: "Post",
+    plural: "Posts",
   },
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'language', 'views', 'category'],
+    useAsTitle: "title",
+    defaultColumns: ["title", "language", "views", "category"],
   },
   timestamps: true,
   access: {
     read: () => true,
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true },
-    { name: 'description', type: 'textarea' },
+    { name: "title", type: "text", required: true },
+    { name: "slug", type: "text", required: true, unique: true },
+    { name: "description", type: "textarea" },
     {
-      name: 'views',
-      type: 'number',
+      name: "views",
+      type: "number",
       defaultValue: 0,
       admin: {
         readOnly: true,
       },
     },
     {
-      name: 'content',
-      type: 'richText',
+      name: "content",
+      type: "richText",
       required: true,
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
@@ -49,7 +43,7 @@ export const Posts: CollectionConfig = {
             BlocksFeature({ blocks: [Code] }),
             InlineToolbarFeature(),
             HorizontalRuleFeature(),
-          ]
+          ];
         },
       }),
     },
@@ -58,38 +52,38 @@ export const Posts: CollectionConfig = {
     afterChange: [
       async ({ doc, previousDoc: prevDoc }) => {
         // New document, always revalidate
-        if (!prevDoc) return
+        if (!prevDoc) return;
 
         // Fields that should trigger revalidation
-        const triggerFields = ['title', 'slug', 'content', 'description'] // adjust as needed
+        const triggerFields = ["title", "slug", "content", "description"]; // adjust as needed
 
         // Check if any trigger field changed
         const shouldRevalidate = triggerFields.some((key) => {
-          if (typeof doc[key] === 'object' && doc[key] !== null) {
-            const oldContent = JSON.stringify(doc[key])
-            const newContent = JSON.stringify(prevDoc[key])
-            return oldContent !== newContent
+          if (typeof doc[key] === "object" && doc[key] !== null) {
+            const oldContent = JSON.stringify(doc[key]);
+            const newContent = JSON.stringify(prevDoc[key]);
+            return oldContent !== newContent;
           }
-          return doc[key] !== prevDoc[key]
-        })
+          return doc[key] !== prevDoc[key];
+        });
 
         // nothing important changed, skip revalidation
-        if (!shouldRevalidate) return
+        if (!shouldRevalidate) return;
 
-        const payload = await getPayloadClient()
+        const payload = await getPayloadClient();
         const categories = await payload.find({
-          collection: 'categories',
+          collection: "categories",
           where: {
             posts: { contains: doc.id },
           },
           limit: 100,
-        })
+        });
 
         for (const category of categories.docs) {
-          const categorySlug = category.slug
-          revalidatePath(`/categories/${categorySlug}/${doc.slug}`)
+          const categorySlug = category.slug;
+          revalidatePath(`/categories/${categorySlug}/${doc.slug}`);
         }
       },
     ],
   },
-}
+};

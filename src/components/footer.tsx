@@ -1,16 +1,16 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { GitHubIcon, GmailIcon, LinkedInIcon, XIcon } from './icons'
+import Image from "next/image";
+import Link from "next/link";
+import { GitHubIcon, GmailIcon, LinkedInIcon, XIcon } from "./icons";
 
 export function Footer() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   const socials = [
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/iadithyana/', icon: LinkedInIcon },
-    { name: 'GitHub', url: 'https://github.com/AdithyanA2005/', icon: GitHubIcon },
-    { name: 'Gmail', url: 'mailto:deepaadithyan56@gmail.com', icon: GmailIcon },
-    { name: 'X', url: 'https://x.com/iadithyana/', icon: XIcon },
-  ]
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/iadithyana/", icon: LinkedInIcon },
+    { name: "GitHub", url: "https://github.com/AdithyanA2005/", icon: GitHubIcon },
+    { name: "Gmail", url: "mailto:deepaadithyan56@gmail.com", icon: GmailIcon },
+    { name: "X", url: "https://x.com/iadithyana/", icon: XIcon },
+  ];
 
   return (
     <footer className="bg-background border-t">
@@ -28,9 +28,7 @@ export function Footer() {
               <p className="text-foreground text-sm font-medium">
                 CoderCodes - <i>By Adithyan A</i>
               </p>
-              <p className="text-muted-foreground text-xs">
-                © {year} Adithyan A. All rights reserved.
-              </p>
+              <p className="text-muted-foreground text-xs">© {year} Adithyan A. All rights reserved.</p>
             </div>
           </div>
 
@@ -41,8 +39,8 @@ export function Footer() {
                   <Link
                     href={social.url}
                     aria-label={social.name}
-                    target={social.url.startsWith('http') ? '_blank' : undefined}
-                    rel={social.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={social.url.startsWith("http") ? "_blank" : undefined}
+                    rel={social.url.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="text-muted-foreground hover:text-primary focus-visible:ring-ring inline-flex h-6 w-6 items-center justify-center rounded-md transition-colors focus:outline-none focus-visible:ring-2"
                   >
                     <span className="sr-only">{social.name}</span>
@@ -58,7 +56,7 @@ export function Footer() {
       <div className="bg-muted/60 border-t">
         <div className="mx-auto w-full max-w-5xl px-4 py-3">
           <p className="text-foreground text-center text-sm">
-            {'Developed by '}
+            {"Developed by "}
             <Link
               href="https://adithyana.vercel.app"
               target="_blank"
@@ -66,11 +64,11 @@ export function Footer() {
               className="hover:text-primary font-mono underline underline-offset-4"
               aria-label="Visit Adithyan A portfolio"
             >
-              {'<Adithyan A/>'}
+              {"<Adithyan A/>"}
             </Link>
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
