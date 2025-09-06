@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { GoBackButton } from "@/components/go-back-button";
 import PaginatedRecordsList from "@/components/records-list";
 import { getPayloadClient } from "@/lib/payload-client";
 
@@ -52,6 +53,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <header className="mb-4">
           <h1 className="text-xl font-semibold text-balance">{category.title}</h1>
           <p className="text-muted-foreground mt-1 text-sm text-pretty">{category.description}</p>
+          <GoBackButton href="/" />
         </header>
 
         <hr className="mt-3 mb-8" />

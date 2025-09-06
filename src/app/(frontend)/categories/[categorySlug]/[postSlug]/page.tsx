@@ -1,5 +1,9 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeftCircleIcon, ArrowLeftIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { GoBackButton } from "@/components/go-back-button";
 import RichText from "@/components/rich-text";
 import { getPayloadClient } from "@/lib/payload-client";
 import { Views, ViewsSkeleton } from "./_components/views";
@@ -48,7 +52,7 @@ export async function generateStaticParams({ params: { categorySlug } }: { param
 }
 
 export default async function Page({ params }: { params: Promise<{ postSlug: string; categorySlug: string }> }) {
-  const { postSlug } = await params;
+  const { postSlug, categorySlug } = await params;
 
   const payload = await getPayloadClient();
 
@@ -77,6 +81,7 @@ export default async function Page({ params }: { params: Promise<{ postSlug: str
       <header className="px-4">
         <h1 className="text-xl font-semibold text-balance">{post.title}</h1>
         <p className="text-muted-foreground mt-1 text-sm text-pretty">{post.description}</p>
+        <GoBackButton href={`/categories/${categorySlug}`} />
       </header>
 
       <hr className="mt-3 mb-8" />
