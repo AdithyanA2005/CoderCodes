@@ -1,9 +1,14 @@
-import { revalidatePath } from 'next/cache';
-import { BlocksFeature, FixedToolbarFeature, HorizontalRuleFeature, InlineToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
-import { CollectionConfig } from 'payload';
-import { getPayloadClient } from '@/lib/payload-client';
-import { Code } from '../blocks/Code/config';
-
+import { revalidatePath } from "next/cache";
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
+import { CollectionConfig } from "payload";
+import { getPayloadClient } from "@/lib/payload-client";
+import { Code } from "../blocks/Code/config";
 
 export const Posts: CollectionConfig = {
   slug: "posts",
@@ -23,6 +28,7 @@ export const Posts: CollectionConfig = {
     { name: "title", type: "text", required: true },
     { name: "slug", type: "text", required: true, unique: true },
     { name: "description", type: "textarea" },
+    { name: "category", type: "relationship", relationTo: "categories", required: true },
     {
       name: "views",
       type: "number",
@@ -55,7 +61,7 @@ export const Posts: CollectionConfig = {
         if (!prevDoc) return;
 
         // Fields that should trigger revalidation
-        const triggerFields = ["title", "slug", "content", "description"]; // adjust as needed
+        const triggerFields = ["title", "slug", "content", "description", "category"]; // adjust as needed
 
         // Check if any trigger field changed
         const shouldRevalidate = triggerFields.some((key) => {
