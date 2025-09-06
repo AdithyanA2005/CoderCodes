@@ -1,25 +1,8 @@
-import { Record } from "@/components/record";
-import { getPayloadClient } from "@/lib/payload-client";
+import { getCategories } from "@/lib/actions/payload";
+import CategoriesList from "./_components/categories-list";
 
 export default async function Collections() {
-  const payload = await getPayloadClient();
-
-  // TODO: SETUP PAGINATION
-  const categories = await payload.find({
-    collection: "categories",
-    select: {
-      title: true,
-      slug: true,
-      description: true,
-    },
-    where: {
-      slug: {
-        exists: true,
-      },
-    },
-    sort: "-updatedAt", // Desending order
-  });
-  // console.log(collections)
+  const categories = await getCategories({ page: 1 });
 
   return (
     <main>
@@ -31,16 +14,7 @@ export default async function Collections() {
           </p>
         </header>
 
-        <div className="flex flex-col gap-3">
-          {categories.docs.map((collection) => (
-            <Record
-              key={`category_card_${collection.id}`}
-              title={collection.title}
-              href={`/categories/${collection.slug}`}
-              description={collection.description || ""}
-            />
-          ))}
-        </div>
+        <CategoriesList initialData={categories} />
       </section>
     </main>
   );
