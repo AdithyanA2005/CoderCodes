@@ -55,9 +55,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                     <Record
                       key={post.title}
                       index={index + 1}
-                      title={post.title || ""}
-                      description={post.description || ""}
-                      href={`${categorySlug}/${post.slug}`}
+                      title={post.title}
+                      description={post.description}
+                      href={`${post.slug}`}
                     />
                   );
               })

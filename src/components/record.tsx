@@ -6,7 +6,7 @@ interface RecordProps {
   index?: number;
   title: string;
   href: string;
-  description?: string;
+  description?: string | null;
 }
 
 export function Record({ index, title, href, description }: RecordProps) {
