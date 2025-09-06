@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import RichText from "@/components/rich-text";
 import { getPayloadClient } from "@/lib/payload-client";
-import { Post } from "@/payload-types";
 import { Views, ViewsSkeleton } from "./_components/views";
 
 export const experimental_ppr = true;
@@ -12,18 +11,10 @@ export const dynamicParams = true; // Pages not created by generateStaticParams 
 export async function generateStaticParams({ params: { categorySlug } }: { params: { categorySlug: string } }) {
   const payload = await getPayloadClient();
 
-  // TODO: Also add a limit on no of posts fetched
   const category = (
     await payload.find({
       collection: "categories",
-      select: {
-        posts: true,
-      },
-      populate: {
-        posts: {
-          slug: true,
-        },
-      },
+      select: {},
       where: {
         slug: {
           equals: categorySlug,
@@ -33,7 +24,22 @@ export async function generateStaticParams({ params: { categorySlug } }: { param
     })
   ).docs[0];
 
-  const posts = category.posts as Post[];
+  if (!category) return [];
+
+  const posts = (
+    await payload.find({
+      collection: "posts",
+      select: {
+        slug: true,
+      },
+      where: {
+        category: {
+          equals: category.id,
+        },
+      },
+    })
+  ).docs;
+
   if (!posts) return [];
 
   return posts.map((post) => ({
