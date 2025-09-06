@@ -204,10 +204,6 @@ export interface Category {
   title: string;
   slug: string;
   description?: string | null;
-  /**
-   * Posts that belong to this category (folder-like view).
-   */
-  posts?: (string | Post)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -380,7 +376,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   description?: T;
-  posts?: T;
   updatedAt?: T;
   createdAt?: T;
 }
