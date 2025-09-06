@@ -1,5 +1,28 @@
-import { getCategories } from "@/lib/actions/payload";
-import CategoriesList from "./_components/categories-list";
+import PaginatedRecordsList from "@/components/records-list";
+import { getPayloadClient } from "@/lib/payload-client";
+
+async function getCategories({ page, limit = 10 }: { page: number; limit?: number }) {
+  "use server";
+
+  const payload = await getPayloadClient();
+
+  return await payload.find({
+    collection: "categories",
+    select: {
+      title: true,
+      slug: true,
+      description: true,
+    },
+    where: {
+      slug: {
+        exists: true,
+      },
+    },
+    page,
+    limit,
+    sort: "-updatedAt", // Desending order
+  });
+}
 
 export default async function Collections() {
   const categories = await getCategories({ page: 1 });
@@ -14,7 +37,7 @@ export default async function Collections() {
           </p>
         </header>
 
-        <CategoriesList initialData={categories} />
+        <PaginatedRecordsList initialData={categories} hrefPrefix="/categories" getRecordsAction={getCategories} />
       </section>
     </main>
   );

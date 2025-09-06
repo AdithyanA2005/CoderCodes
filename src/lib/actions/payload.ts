@@ -27,39 +27,3 @@ export async function upsertUser({ email, name, image }: { email: string; name: 
     data: { email, name, image },
   });
 }
-
-export async function getCategories({
-  page,
-  limit = 10,
-  select,
-}: {
-  page: number;
-  limit?: number;
-  select?: CategoriesSelect<true>;
-}) {
-  "use server";
-
-  const payload = await getPayloadClient();
-
-  const categories = await payload.find({
-    collection: "categories",
-    select: {
-      title: true,
-      slug: true,
-      description: true,
-      ...select,
-    },
-    where: {
-      slug: {
-        exists: true,
-      },
-    },
-    page,
-    limit,
-    sort: "-updatedAt", // Desending order
-  });
-
-  console.log(categories);
-
-  return categories;
-}

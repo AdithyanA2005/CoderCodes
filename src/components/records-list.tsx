@@ -4,12 +4,30 @@ import { useState, useTransition } from "react";
 import { PaginatedDocs } from "payload";
 import { Button } from "@/components/ui/button";
 import { Record } from "@/components/record";
-import { getCategories } from "@/lib/actions/payload";
-import { Category } from "@/payload-types";
 
-type ICategory = Pick<Category, "id" | "title" | "slug" | "description">;
+type IGetRecordsActionProps = {
+  page: number;
+  limit?: number;
+};
 
-export default function CategoriesList({ initialData }: { initialData: PaginatedDocs<ICategory> }) {
+type IPaginatedRecords = PaginatedDocs<{
+  id: string;
+  title: string;
+  slug: string;
+  description?: string | null;
+}>;
+
+export default function PaginatedRecordsList({
+  initialData,
+  showIndex,
+  hrefPrefix,
+  getRecordsAction: getRecords,
+}: {
+  hrefPrefix: string;
+  showIndex?: boolean;
+  initialData: IPaginatedRecords;
+  getRecordsAction: ({ page, limit }: IGetRecordsActionProps) => Promise<IPaginatedRecords>;
+}) {
   const [data, setData] = useState(initialData);
   const [isPending, startTransition] = useTransition();
 
@@ -17,7 +35,7 @@ export default function CategoriesList({ initialData }: { initialData: Paginated
     if (!data.hasNextPage) return;
 
     startTransition(async () => {
-      const newPage = await getCategories({ page: data.nextPage! });
+      const newPage = await getRecords({ page: data.nextPage! });
       setData({
         ...newPage,
         docs: [...data.docs, ...newPage.docs],
@@ -27,12 +45,13 @@ export default function CategoriesList({ initialData }: { initialData: Paginated
 
   return (
     <div className="flex flex-col gap-3">
-      {data.docs.map((collection) => (
+      {data.docs.map(({ id, title, description, slug }, index) => (
         <Record
-          key={`category_card_${collection.id}`}
-          title={collection.title}
-          href={`/categories/${collection.slug}`}
-          description={collection.description || ""}
+          key={`record_card_${id}`}
+          index={showIndex ? index : undefined}
+          href={`${hrefPrefix}/${slug}`}
+          title={title}
+          description={description}
         />
       ))}
 
