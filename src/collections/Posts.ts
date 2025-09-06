@@ -77,17 +77,16 @@ export const Posts: CollectionConfig = {
         if (!shouldRevalidate) return;
 
         const payload = await getPayloadClient();
-        const categories = await payload.find({
-          collection: "categories",
-          where: {
-            posts: { contains: doc.id },
-          },
-          limit: 100,
-        });
 
-        for (const category of categories.docs) {
-          const categorySlug = category.slug;
-          revalidatePath(`/categories/${categorySlug}/${doc.slug}`);
+        if (doc.category) {
+          const category = await payload.findByID({
+            collection: "categories",
+            id: doc.category,
+          });
+
+          if (category?.slug) {
+            revalidatePath(`/categories/${category.slug}/${doc.slug}`);
+          }
         }
       },
     ],
