@@ -1,10 +1,25 @@
 import { after } from "next/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getPayloadClient } from "@/lib/payload-client";
+import { auth } from "@/auth";
+
+function Component({ views }: { views: number }) {
+  const isSingular = views === 1;
+
+  return (
+    <div className="view_container">
+      <span className="font-black">{`${views} ${isSingular ? "view" : "views"}`}</span>
+    </div>
+  );
+}
 
 export async function Views({ slug }: { slug: string }) {
-  const payload = await getPayloadClient();
+  // Fetch user
+  const session = await auth();
+  if (!session?.user) return <Component views={0} />;
 
+  // Fetch Post
+  const payload = await getPayloadClient();
   const post = (
     await payload.find({
       collection: "posts",
@@ -17,29 +32,49 @@ export async function Views({ slug }: { slug: string }) {
       depth: 0,
     })
   ).docs[0];
+  if (!post) return <Component views={0} />;
 
-  let totalViews = 0;
+  let totalViews = post.views || 0;
 
-  if (post) {
-    totalViews = post.views || 0;
+  after(async () => {
+    // 2️⃣ Increment views count
+    await payload.update({
+      collection: "posts",
+      depth: 0, // Without depth 0, there occurs a reference error during update
+      id: post.id,
+      data: { views: totalViews + 1 },
+    });
 
-    // Increment views after rendering
-    after(async () => {
-      await payload.update({
-        collection: "posts", // Replace with your collection name
-        id: post.id,
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+
+    // Find existing visit record if withing last hour
+    const existing = (
+      await payload.find({
+        collection: "visits",
+        where: {
+          blog: { equals: post.id },
+          user: { equals: session?.user?.id },
+          visitedAt: { greater_than: oneHourAgo.toISOString() },
+        },
+        limit: 1,
+      })
+    ).docs[0];
+
+    // Only one record per user per hour
+    if (!existing) {
+      // 1️⃣ Insert visit
+      await payload.create({
+        collection: "visits",
         data: {
-          views: totalViews + 1,
+          user: session?.user?.id,
+          blog: post.id,
+          visitedAt: new Date().toISOString(),
         },
       });
-    });
-  }
+    }
+  });
 
-  return (
-    <div className="view_container">
-      <span className="font-black">{`${totalViews + 1} view${totalViews + 1 > 1 ? "s" : ""}`}</span>
-    </div>
-  );
+  return <Component views={totalViews} />;
 }
 
 export function ViewsSkeleton() {
