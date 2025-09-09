@@ -14,6 +14,7 @@ export async function Views({ slug }: { slug: string }) {
         },
       },
       limit: 1,
+      depth: 0,
     })
   ).docs[0];
 
