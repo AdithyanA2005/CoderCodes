@@ -34,7 +34,7 @@ export async function Views({ slug }: { slug: string }) {
   ).docs[0];
   if (!post) return <Component views={0} />;
 
-  let totalViews = post.views || 0;
+  const totalViews = post.views || 0;
 
   after(async () => {
     // 2️⃣ Increment views count
