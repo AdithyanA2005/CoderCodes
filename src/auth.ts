@@ -7,7 +7,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   callbacks: {
     async signIn({ user: { name, email, image } }) {
-      upsertUser({
+      await upsertUser({
         email: email!,
         name: name!,
         image: image!,
