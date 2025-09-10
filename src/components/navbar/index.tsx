@@ -26,7 +26,7 @@ export async function Navbar() {
         <div className="flex items-center gap-3">
           {session && session.user ? (
             <DropdownMenu>
-              <DropdownMenuTrigger aria-label="Account menu">
+              <DropdownMenuTrigger aria-label="Account menu" className="cursor-pointer">
                 <Avatar className="size-10">
                   <AvatarImage src={session.user.image || ""} />
                   <AvatarFallback>
@@ -50,7 +50,7 @@ export async function Navbar() {
                     </span>
 
                     {/* Submit Button */}
-                    <button type="submit" className="absolute inset-0 opacity-0">
+                    <button type="submit" className="absolute inset-0 cursor-pointer opacity-0">
                       Logout
                     </button>
                   </form>
@@ -61,7 +61,7 @@ export async function Navbar() {
             <form action={signInAction}>
               <HoverBorderGradient
                 as="button"
-                className="flex items-center space-x-2 bg-white py-1.5 text-black dark:bg-black dark:text-white"
+                className="flex cursor-pointer items-center space-x-2 bg-white py-1.5 text-black dark:bg-black dark:text-white"
               >
                 Login
               </HoverBorderGradient>
